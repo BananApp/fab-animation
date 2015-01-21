@@ -29,7 +29,8 @@
             android:id="@+id/target_view"
             android:background="@color/pink_accent_a200"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="200dp"
+            android:layout_gravity="center_vertical"
             android:visibility="invisible"/>
 
     </FrameLayout>

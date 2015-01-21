@@ -54,17 +54,23 @@ public class MainActivity extends ActionBarActivity {
         int heightOffset = fabHeight / 2;
         int widthOffset = fabWidth / 2;
 
-        int cx = (mTargetView.getLeft() + mTargetView.getRight()) / 2 - widthOffset;
-        int cy = (mTargetView.getTop() + mTargetView.getBottom()) / 2 - heightOffset;
+        int cx = (mTargetView.getLeft() + mTargetView.getRight()) / 2;
+        int cy = (mTargetView.getTop() + mTargetView.getBottom()) / 2;
 
-        ObjectAnimator animatorX = ObjectAnimator.ofFloat(mFloatingActionButton, View.X, cx);
+        ObjectAnimator animatorX =
+                ObjectAnimator.ofFloat(mFloatingActionButton, View.X, cx - widthOffset);
         animatorX.setInterpolator(new LinearInterpolator());
-        ObjectAnimator animatorY = ObjectAnimator.ofFloat(mFloatingActionButton, View.Y, cy);
+        ObjectAnimator animatorY =
+                ObjectAnimator.ofFloat(mFloatingActionButton, View.Y, cy - heightOffset);
+
         animatorY.setInterpolator(new AccelerateInterpolator());
 
-        int finalRadius = Math.max(mTargetView.getWidth(), mTargetView.getHeight());
+        int w = mTargetView.getWidth();
+        int h = mTargetView.getHeight();
+        float maxRadius = (float) Math.sqrt(w * w / 4 + h * h / 4);
+        Animator animatorReveal = ViewAnimationUtils.createCircularReveal(mTargetView,
+                                                                  w / 2, h / 2, 0, maxRadius);
 
-        Animator animatorReveal = ViewAnimationUtils.createCircularReveal(mTargetView, cx, cy, 0, finalRadius);
         animatorReveal.addListener(new AnimatorListenerAdapter() {
 
             @Override
