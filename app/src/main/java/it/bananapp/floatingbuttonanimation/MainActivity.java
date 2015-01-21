@@ -65,7 +65,6 @@ public class MainActivity extends ActionBarActivity {
         int finalRadius = Math.max(mTargetView.getWidth(), mTargetView.getHeight());
 
         Animator animatorReveal = ViewAnimationUtils.createCircularReveal(mTargetView, cx, cy, 0, finalRadius);
-        animatorReveal.setStartDelay(200);
         animatorReveal.addListener(new AnimatorListenerAdapter() {
 
             @Override
@@ -76,7 +75,9 @@ public class MainActivity extends ActionBarActivity {
             }
         });
 
-        animatorSet.playTogether(animatorX, animatorY, animatorReveal);
+        animatorSet.playTogether(animatorX, animatorY);
+        animatorSet.play(animatorReveal).after(animatorX);
+
         animatorSet.setDuration(getResources().getInteger(android.R.integer.config_mediumAnimTime));
 
         animatorSet.start();
