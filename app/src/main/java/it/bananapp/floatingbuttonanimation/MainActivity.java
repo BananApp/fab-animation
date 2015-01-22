@@ -69,7 +69,7 @@ public class MainActivity extends ActionBarActivity {
         int h = mTargetView.getHeight();
         float maxRadius = (float) Math.sqrt(w * w / 4 + h * h / 4);
         Animator animatorReveal = ViewAnimationUtils.createCircularReveal(mTargetView,
-                                                                  w / 2, h / 2, 0, maxRadius);
+                                                                  w / 2, h / 2, widthOffset, maxRadius);
 
         animatorReveal.addListener(new AnimatorListenerAdapter() {
 
